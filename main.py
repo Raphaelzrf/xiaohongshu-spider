@@ -28,7 +28,7 @@ def main(args):
                 fiddlerSaveData(word)
                 print(f'fiddler数据导出完成')
                 fiddlerClean()
-                
+                print(f'fiddler数据清理完毕')
                 # 返回代码编辑器,以便程序输出信息查看
                 # 如果不是vscode,请截取你的底部导航栏的代码编辑器(如pycharm)的截图,并替换(./image_folder/codeIDE.png)
                 leftClick('./image_folder/codeIDE.png')
@@ -41,7 +41,7 @@ def main(args):
         fiddlerSaveData(word)
         print(f'fiddler数据导出完成')
         fiddlerClean()
-        
+        print(f'fiddler数据清理完毕')
         # 返回代码编辑器,以便程序输出信息查看
         # 如果不是vscode,请截取你的底部导航栏的代码编辑器(如pycharm)的截图,并替换(./image_folder/codeIDE.png)
         leftClick('./image_folder/codeIDE.png')
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # 按当前关键字参数重置配置文件信息，配置信息初始化,不会执行程序
     parser.add_argument('--reset',action='store_true')
     # 关键字 | 多参数
-    parser.add_argument('key_word',  metavar='N', type=str, nargs='*',default=['藕粉','养生','代餐'])
+    parser.add_argument('key_word',  metavar='N', type=str, nargs='*')
     # 采集数量 
     # 微信小程序小红书最大100,请勿调大，可以调小
     parser.add_argument('--target',default=100,type=int)

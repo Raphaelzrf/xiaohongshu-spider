@@ -17,20 +17,29 @@ def XHS_browse(cfg,word):
     pyautogui.PAUSE = 0.5
     
     #confidence 置信度
+    print('正在搜索小红书图标')
     coords = pyautogui.locateOnScreen('./image_folder/icon.png',confidence = 0.8)
     
-    if checkMatch(coords):exit(0)
+    if checkMatch(coords):
+        print('小红书图标搜索失败,请检查是否打开微信小红书的图标')
+        print('或者截图您导航栏中小红书图标替换image_folder文件夹中的icon.png')
+        exit(0)
     #获取定位到的图中间点坐标
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     
+    print('正在搜索返回图标')
     return_icon = pyautogui.locateOnScreen('./image_folder/return.png',confidence = 0.8)
     if return_icon!=None:
+        print('找到返回图标')
         return_icon_x,return_icon_y=pyautogui.center(return_icon)
         pyautogui.click(return_icon_x,return_icon_y,button='left')
-    
+    else:
+        print('返回图标查找失败')
     coords = pyautogui.locateOnScreen('./image_folder/search.png',confidence = 0.8)
-    if checkMatch(coords):exit(0)
+    if checkMatch(coords):
+        print('找不到搜索图标')
+        exit(0)
     
     x,nav_y=pyautogui.center(coords)
     x +=50
@@ -133,7 +142,10 @@ def XHS_keep_browse(cfg,word):
     
     coords = pyautogui.locateOnScreen('./image_folder/icon.png',confidence = 0.8)
     
-    if checkMatch(coords):exit(0)
+    if checkMatch(coords):
+        print('小红书图标搜索失败,请检查是否打开微信小红书的图标')
+        print('或者截图您导航栏中小红书图标替换image_folder文件夹中的icon.png')
+        exit(0)
     #获取定位到的图中间点坐标
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')

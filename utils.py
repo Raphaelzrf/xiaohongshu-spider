@@ -78,8 +78,12 @@ def checkVideoReturn():
 
 
 def leftClick(image_name,interval=0.5):
+    print(f'matching icon {image_name}')
     coords = pyautogui.locateOnScreen(image_name,confidence = 0.8)
-    if checkMatch(coords):exit(0)
+    if checkMatch(coords):
+        print(f'匹配图标{image_name}失败,请检查是否打开fiddler')
+        print(f'或者由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标后即可解决')
+        exit(0)
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     time.sleep(interval)

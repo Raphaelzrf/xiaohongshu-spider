@@ -1,4 +1,5 @@
 
+from pymysql import NULL
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By 
@@ -10,6 +11,11 @@ import re
 def urlProcess(word):
     
     file = open(f'./data/{word}_fiddler.txt','r',encoding='utf-8')
+    if file==NULL:
+        print(f'未找到./data/{word}_fiddler.txt')
+        print('请检查您的默认fiddler文件保存位置,file->save->selected all sessions->as text')
+        print('如果selected all sessions为灰色无法选择 -> 请随意点击小红书小程序创造数据,全选')
+        print('将其默认保存路径手动改为该文件夹下/data')
     file_data = file.read()
     
     base_url = "https://www.xiaohongshu.com/discovery/item/"
