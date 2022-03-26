@@ -31,9 +31,9 @@ def fiddlerSaveData(word):
     # im.save('屏幕截图.png')
 
 def fiddlerClean():
-    leftClick('./image_folder/fiddler/x.png',0.1)
+    leftClick('./image_folder/fiddler/x.png',stay_interval=0.5)
     leftClick('./image_folder/fiddler/remove.png')
-    
+    leftClick('./image_folder/fiddler/fiddler.png')
     
     # im = pyautogui.screenshot()
     # im.save('屏幕截图.png')

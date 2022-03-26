@@ -1,3 +1,10 @@
-MAX_RETURN_ICON: 20
-MAX_VIDEO_ICON: 20
 SAVE_FREQUNCY: 20
+SCREEN_SCALING: 100
+"\u5C0F\u9E1F":
+  now: 0
+  pointer: 0
+  target: 10
+"\u7A0B\u5E8F\u5458":
+  now: 0
+  pointer: 0
+  target: 10

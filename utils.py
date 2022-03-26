@@ -1,6 +1,7 @@
 
 from itertools import chain
-from sympy import content
+import cv2
+import os
 from xpinyin import Pinyin as p
 import pyautogui
 import os
@@ -64,27 +65,23 @@ def getVideoReturnIcon(cfg):
     return video_return
         
         
-
-def checkDistance(nav_y,y):
-    
-    if y-nav_y<100:
-        return True
-    else:
-        return False
     
 def checkVideoReturn():
     coords = pyautogui.locateOnScreen('./image_folder/search.png',confidence = 0.8)
     return not checkMatch(coords)
 
 
-def leftClick(image_name,interval=0.5):
-    print(f'matching icon {image_name}')
+def leftClick(image_name,interval=0.5,stay_interval = 0):
+    #print(f'matching icon {image_name}')
     coords = pyautogui.locateOnScreen(image_name,confidence = 0.8)
     if checkMatch(coords):
         print(f'匹配图标{image_name}失败,请检查是否打开fiddler')
         print(f'或者由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标后即可解决')
         exit(0)
     x,y=pyautogui.center(coords)
+    if stay_interval!=0:
+        pyautogui.moveTo(x,y)
+        time.sleep(stay_interval)
     pyautogui.click(x,y,button='left')
     time.sleep(interval)
     
@@ -107,4 +104,22 @@ def saveArticles(word,articles):
     print(f'./result/{word}文章内容.csv 成功保存')
     print(f'./result/{word}文章内容.txt 成功保存')
     
+
+def PictureResize(scale_before,scale_after):
+    '''
+    different computer screens have different scales, different size of screenshots didn't match
+    well, do picture resize for picture match in the future program
     
+    '''
+    rate = scale_before/scale_after
+    
+    for root,_,files in os.walk("image_folder"):
+        for file_name in files:
+            image_path = os.path.join(root,file_name)
+            image = cv2.imread(image_path)
+            H,W,C = image.shape
+            dim = (int(W/rate),int(H/rate))
+            new_image = cv2.resize(image,dim)
+            cv2.imwrite(image_path,new_image)
+            print(f'changing image {image_path} from ({W} , {H}) -> {dim}')
+            

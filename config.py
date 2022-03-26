@@ -1,6 +1,11 @@
 
 
+import pyautogui
+from sympy import true
 import yaml
+
+from utils import PictureResize
+
 
 def readConfigFile(file_name = 'config.yaml'):
     # 打开yaml文件
@@ -36,7 +41,6 @@ def initialConfig(args,key_word,file_name = 'config.yaml'):
     判断是否有新键,有的话加上
     '''
     data = readConfigFile()
-    
     CHANGE = False
     
     for word in key_word:
@@ -50,6 +54,7 @@ def initialConfig(args,key_word,file_name = 'config.yaml'):
         else:
             if data[word]['target']!=args.target:
                 data[word]['target'] = args.target
+                CHANGE = True
         
     if CHANGE:
         writeConfigFile(data,file_name)
@@ -65,8 +70,7 @@ def initialConfig(args,key_word,file_name = 'config.yaml'):
 def resetConfig(args,key_word,file_name = 'config.yaml'):
 
     data = {
-        'MAX_RETURN_ICON': 20,
-        'MAX_VIDEO_ICON': 20,
+        'SCREEN_SCALING': 100,
         'SAVE_FREQUNCY': 20
     }
     for word in key_word:

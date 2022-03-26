@@ -4,9 +4,7 @@ import pyperclip
 
 import time
 from config import recordNumber
-
-
-from utils import checkDistance, checkMatch, checkVideo, checkVideoReturn,findKeyboardInput, getVideoIcon, getVideoReturnIcon
+from utils import checkMatch
 
 
 def XHS_browse(cfg,word):
@@ -35,15 +33,17 @@ def XHS_browse(cfg,word):
         return_icon_x,return_icon_y=pyautogui.center(return_icon)
         pyautogui.click(return_icon_x,return_icon_y,button='left')
     else:
-        print('返回图标查找失败')
+        print('不在搜索页面')
+        
     coords = pyautogui.locateOnScreen('./image_folder/search.png',confidence = 0.8)
     if checkMatch(coords):
         print('找不到搜索图标')
+        print(f'请手动截图小红书小程序搜索按钮(./image_folder/search.png)替换./image_folder/search.png')
         exit(0)
     
-    x,nav_y=pyautogui.center(coords)
-    x +=50
-    pyautogui.click(x,nav_y,button='left',clicks=2,interval=0.3)
+    nav_x,nav_y=pyautogui.center(coords)
+    nav_x +=50
+    pyautogui.click(nav_x,nav_y,button='left',clicks=2,interval=0.3)
     pyautogui.hotkey('ctrl','a')
     
     #keyboardInput = findKeyboardInput(word)
@@ -53,11 +53,11 @@ def XHS_browse(cfg,word):
     pyautogui.press('enter')
     
     time.sleep(2)
-    coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking.png',confidence = 0.8)
+    coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking.png',confidence = 0.6)
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     time.sleep(0.2)
-    coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking_select.png',confidence = 0.8)
+    coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking_select.png',confidence = 0.6)
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     
@@ -68,61 +68,47 @@ def XHS_browse(cfg,word):
     pointer = cfg[word]['pointer']
     
     return_icon = pyautogui.locateOnScreen('./image_folder/return.png',confidence = 0.8)
-    return_icon_x,return_icon_y=pyautogui.center(return_icon)
+    
+    if return_icon == None:
+        print('locate by home.png as search.png')
+        home_icon = pyautogui.locateOnScreen('./image_folder/home.png',confidence = 0.8)
+        home_x,home_y = pyautogui.center(home_icon)
+        return_icon_x = nav_x
+        return_icon_y = home_y
+    else:
+        return_icon_x,return_icon_y=pyautogui.center(return_icon)
     while(result_num<MAX_RESULT):
         if result_num >= cfg['SAVE_FREQUNCY']*pointer:
             recordNumber(word,result_num,pointer)
             pointer+=1
             
-        coords = pyautogui.locateAllOnScreen('./image_folder/like.png',confidence = 0.8)
+        coords = pyautogui.locateAllOnScreen('./image_folder/like.png',confidence = 0.9)
+        roll_distance = 50
         
-        # video_icon = getVideoIcon()
-
-        # ignore_items = []
-        # for pos in video_icon:
-        #     x,y = pyautogui.center(pos)
-        #     ignore_items.append([x,y])
-        roll_distance = -20
+        x_before = 0
+        y_before = 0
         for pos in coords:
             roll_distance = max(int(pos[1])-int(nav_y),roll_distance)
             x,y = pyautogui.center(pos)
-            # if checkVideo(ignore_items,x,y,nav_y):
-            #     #print('已跳过')
-            #     continue
-            if checkDistance(nav_y,y):
+            # print(x,y)
+            if abs(x_before-x)<10 and abs(y_before-y)<10:
+                continue
+            x_before = x
+            y_before = y
+            if y-nav_y<100:  
+                # if an item stay too close to the nav 
+                # it may belong to an item checked
                 continue
             pyautogui.click(x,y,button='left')
             time.sleep(1)
-            
-            
-            # if checkMatch(return_icon):
-            #     return_icon = getVideoReturnIcon(cfg)
-            #     for id,t in enumerate(return_icon):
-            #         return_icon_x,return_icon_y=pyautogui.center(t)
-            #         pyautogui.click(return_icon_x,return_icon_y,button='left')
-            #         time.sleep(1)
-            #         pyautogui.moveTo(return_icon_x+50,return_icon_y+50)
-            #         if checkVideoReturn():
-            #             #print('successfully return from video')
-            #             break
-            #         else:
-            #             print(f'test return icon{id}')
-                     
-                        
-            # else:
-            #     return_icon_x,return_icon_y=pyautogui.center(return_icon)
-            #     pyautogui.click(return_icon_x,return_icon_y,button='left')
-            #     time.sleep(1)
             pyautogui.click(return_icon_x,return_icon_y,button='left')
             result_num+=1
-            #print(result_num)
-        #print('start to roll')
         pyautogui.scroll(-roll_distance)
         time.sleep(0.5)
         
     recordNumber(word,result_num)
         
-        
+
 def XHS_keep_browse(cfg,word):
     
     MAX_RESULT = cfg[word]['target']
@@ -161,52 +147,30 @@ def XHS_keep_browse(cfg,word):
     
     while(result_num<MAX_RESULT):
         if result_num >= cfg['SAVE_FREQUNCY']*pointer:
-
             recordNumber(word,result_num,pointer)
             pointer+=1
-        coords = pyautogui.locateAllOnScreen('./image_folder/like.png',confidence = 0.8)
+            
+        coords = pyautogui.locateAllOnScreen('./image_folder/like.png',confidence = 0.9)
+        roll_distance = 50
         
-        # video_icon = getVideoIcon()
-
-        # ignore_items = []
-        # for pos in video_icon:
-        #     x,y = pyautogui.center(pos)
-        #     ignore_items.append([x,y])
-        
-        roll_distance = 100
+        x_before = 0
+        y_before = 0
         for pos in coords:
             roll_distance = max(int(pos[1])-int(nav_y),roll_distance)
             x,y = pyautogui.center(pos)
-            # if checkVideo(ignore_items,x,y,nav_y):
-            #     #print('已跳过')
-            #     continue
-            if checkDistance(nav_y,y):
+            # print(x,y)
+            if abs(x_before-x)<10 and abs(y_before-y)<10:
+                continue
+            x_before = x
+            y_before = y
+            if y-nav_y<100:  
+                # if an item stay too close to the nav 
+                # it may belong to an item checked
                 continue
             pyautogui.click(x,y,button='left')
             time.sleep(1)
-            
-            
-            # if checkMatch(return_icon):
-            #     return_icon = getVideoReturnIcon(cfg)
-            #     for id,t in enumerate(return_icon):
-            #         return_icon_x,return_icon_y=pyautogui.center(t)
-            #         pyautogui.click(return_icon_x,return_icon_y,button='left')
-            #         time.sleep(0.5)
-            #         pyautogui.moveTo(return_icon_x+50,return_icon_y+50)
-            #         if checkVideoReturn():
-            #             #print('successfully return from video')
-            #             break
-            #         else:
-            #             print(f'test return icon{id}')
-                     
-                        
-            # else:
-            #     return_icon_x,return_icon_y=pyautogui.center(return_icon)
             pyautogui.click(return_icon_x,return_icon_y,button='left')
-            time.sleep(1)
             result_num+=1
-            #print(result_num)
-        #print('start to roll')
         pyautogui.scroll(-roll_distance)
         time.sleep(0.5)
     

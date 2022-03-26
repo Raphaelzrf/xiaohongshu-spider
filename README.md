@@ -31,12 +31,13 @@
 
 ## 使用方法
 
+- [使用视频介绍-2022/3/27补丁更新]
 - [视频介绍](https://github.com/learner-lu/xiaohongshu-spider/releases/download/v0.0.1/2022-03-13.17-53-57.mkv) **如需使用务必观看,以及可能会出现的问题**
+- [爬虫设计与实现思路-B站视频](https://www.bilibili.com/video/BV1ob4y1H7vL?spm_id_from=333.999.0.0)
 - 文字介绍
   - 打开fiddler(保证底部导航栏有图标),设置filters->show only the following host->`t.xiaohongshu.com`
   - 电脑端打开微信小程序小红书(保证底部导航栏有图标)
   - 点击fiddler->file->save->select sessions->as text: 选择默认保存路径为该项目的data文件夹下(./data)
-  - 如果使用的代码编辑器不是vscode,需要重新截图保存,见main.py 33行
   - 基本用法:
 
     ```python
@@ -44,21 +45,43 @@
     ```
 
   - 参数介绍
-    - 加入搜索的内容,使用空格分隔,支持多个查找
+
+    - **添加默认缩放比例(前提)**
+      > 由于笔记本可能采用屏幕缩放(100% 150%),**不修改此项会导致图像匹配失败**
+      >
+      > pyautogui作者亲自回答了这个问题: [pyautogui图像匹配失败,分辨率?](https://stackoverflow.com/questions/45302681/running-pyautogui-on-a-different-computer-with-different-resolution),作者推荐重新截图,但是我使用了一种其他的方式解决这个问题,目前看来是可行的
+
+      桌面右键 -> 显示设置 -> 缩放, 修改为您屏幕的缩放(默认100),该项只需再运行前修改一次,将保存您的修改,此后均不需执行此项,如果更换显示设备需重新配置.
+
+      ```python
+      python main.py --scale 150
+      ```
+
+      > 由于多次resize会导致图片匹配效果较差,故不支持恢复操作. 我备份了所有图片(image_folder_copy),如果需要可以删除并替换
+
+    - **加入搜索的内容(必)**,使用空格分隔,支持多个查找
 
       ```python
       python main.py 樱花 小鸟 鱼
       ```
 
-    - `--target`: 修改匹配数量,默认100个(小红书小程序搜索上限),可以调低
+    - `--target(选)`: 修改匹配数量,默认100个(小红书小程序搜索上限),可以调低
 
       ```python
       python main.py 程序员 --target 30
       ```
 
-    - `--keep`: 因为某些特殊原因小红书搜索过程中强行中断(ctrl+c)后接着之前的位置继续搜索(不建议使用)
-    - `--config`: 配置文件的位置(不建议更改)
-    - `--reset`: 重置配置文件
+    - `-f`: 单独执行fiddler文件解析(不常用,需要使用时会有提示)
+
+      ```python
+      python main.py 程序员 -f
+      ```
+
+    - `--reset`: 重置配置文件,图片不会恢复原尺寸
+
+      ```python
+      python main.py --reset
+      ```
 
 ## 学习资料
 
