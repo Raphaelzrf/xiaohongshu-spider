@@ -2,7 +2,6 @@
 import pyautogui
 import pyperclip
 from utils import leftClick
-import time
 
 def fiddlerSaveData(word):
     

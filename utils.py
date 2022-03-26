@@ -17,13 +17,13 @@ def checkMatch(coords, picName = ''):
     else: return False
     
     
-
+# abort
 def findKeyboardInput(word):
     keyboardInput = p().get_pinyin(word,'')
     return keyboardInput
     
     
-
+# abort
 def checkVideo(ignore_items,x,y,nav_y):
     '''
     跳过视频,不获取小红书中的视频,只要文章,视频会使寻找退出按钮的图像不易定位
@@ -37,6 +37,7 @@ def checkVideo(ignore_items,x,y,nav_y):
     return False
 #findKeyboardInput("代餐")
 
+# abort
 def getVideoIcon(cfg):
     
     video_icon = []
@@ -50,6 +51,7 @@ def getVideoIcon(cfg):
     video_icon = chain(*video_icon)
     return video_icon
 
+# abort
 def getVideoReturnIcon(cfg):
     
     video_return = []
@@ -65,7 +67,7 @@ def getVideoReturnIcon(cfg):
     return video_return
         
         
-    
+# abort
 def checkVideoReturn():
     coords = pyautogui.locateOnScreen('./image_folder/search.png',confidence = 0.8)
     return not checkMatch(coords)
@@ -79,7 +81,7 @@ def leftClick(image_name,interval=0.5,stay_interval = 0):
         print('三种原因异常:')
         print(f'1. 匹配图标{image_name}失败,请检查是否打开fiddler\n')
         print(f'2. 匹配图标{image_name}失败,请检查fiddler是否上方有黄色警示条,解决方式见README\n')
-        print(f'3. 由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标后即可解决\n\n')
+        print(f'3. 由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标\n\n')
         print('------------------------\n')
         exit(0)
     x,y=pyautogui.center(coords)
@@ -91,12 +93,13 @@ def leftClick(image_name,interval=0.5,stay_interval = 0):
     
 def saveArticles(word,articles):
     
-    # txt
+    # txt+csv
     txt_file = open(f'./result/{word}文章内容.txt','w',encoding='utf-8')
     csv_file = open(f'./result/{word}文章内容.csv','w',encoding='utf-8',newline="")
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(["url","content"])
     
+    print('writing ...')
     for data in articles:
         #txt_file.write(data['url']+'\n')
         txt_file.write(data['content']+'\n')

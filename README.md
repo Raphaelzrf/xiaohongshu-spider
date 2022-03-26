@@ -32,7 +32,7 @@
 ## 使用方法
 
 - [使用视频介绍-2022/3/27补丁更新]
-- [视频介绍](https://github.com/learner-lu/xiaohongshu-spider/releases/download/v0.0.1/2022-03-13.17-53-57.mkv) **如需使用务必观看,以及可能会出现的问题**
+- [视频介绍](https://github.com/learner-lu/xiaohongshu-spider/releases/download/v0.0.1/2022-03-13.17-53-57.mkv) **使用前请下载观看**
 - [爬虫设计与实现思路-B站视频](https://www.bilibili.com/video/BV1ob4y1H7vL?spm_id_from=333.999.0.0)
 - 文字介绍
   - 打开fiddler(保证底部导航栏有图标),设置filters->show only the following host->`t.xiaohongshu.com`
@@ -51,7 +51,9 @@
       >
       > pyautogui作者亲自回答了这个问题: [pyautogui图像匹配失败,分辨率?](https://stackoverflow.com/questions/45302681/running-pyautogui-on-a-different-computer-with-different-resolution),作者推荐重新截图,但是我使用了一种其他的方式解决这个问题,目前看来是可行的
 
-      桌面右键 -> 显示设置 -> 缩放, 修改为您屏幕的缩放(默认100),该项只需再运行前修改一次,将保存您的修改,此后均不需执行此项,如果更换显示设备需重新配置.
+      桌面右键 -> 显示设置 -> 缩放, 可以找到您当前屏幕的缩放尺寸.笔记本可能采用屏幕缩放(100% 150% 200%)
+
+      scale后修改为您屏幕的缩放大小(默认100),该项只需再运行前修改一次,将全局保存您的修改,此后均不需执行此项,如果更换显示设备需重新配置.
 
       ```python
       python main.py --scale 150
@@ -65,7 +67,7 @@
       python main.py 樱花 小鸟 鱼
       ```
 
-    - `--target(选)`: 修改匹配数量,默认100个(小红书小程序搜索上限),可以调低
+    - **`--target(选)`**: 修改匹配数量,默认100个(小红书小程序搜索上限),可以调低
 
       ```python
       python main.py 程序员 --target 30

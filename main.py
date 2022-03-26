@@ -1,6 +1,4 @@
 
-
-from numpy import dtype
 from config import initialConfig, readConfigFile, resetConfig, writeConfigFile
 from XHSprocess import XHS_browse, XHS_keep_browse
 import argparse

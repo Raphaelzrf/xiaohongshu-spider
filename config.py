@@ -1,11 +1,4 @@
-
-
-import pyautogui
-from sympy import true
 import yaml
-
-from utils import PictureResize
-
 
 def readConfigFile(file_name = 'config.yaml'):
     # 打开yaml文件
