@@ -75,8 +75,12 @@ def leftClick(image_name,interval=0.5,stay_interval = 0):
     #print(f'matching icon {image_name}')
     coords = pyautogui.locateOnScreen(image_name,confidence = 0.8)
     if checkMatch(coords):
-        print(f'匹配图标{image_name}失败,请检查是否打开fiddler')
-        print(f'或者由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标后即可解决')
+        print('------------------------\n\n')
+        print('三种原因异常:')
+        print(f'1. 匹配图标{image_name}失败,请检查是否打开fiddler\n')
+        print(f'2. 匹配图标{image_name}失败,请检查fiddler是否上方有黄色警示条,解决方式见README\n')
+        print(f'3. 由于图标显示问题造成匹配失败,请查找{image_name}路径的图片,截取您电脑端对应的图标,替换对应图标后即可解决\n\n')
+        print('------------------------\n')
         exit(0)
     x,y=pyautogui.center(coords)
     if stay_interval!=0:

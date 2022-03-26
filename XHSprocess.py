@@ -19,8 +19,10 @@ def XHS_browse(cfg,word):
     coords = pyautogui.locateOnScreen('./image_folder/icon.png',confidence = 0.8)
     
     if checkMatch(coords):
-        print('小红书图标搜索失败,请检查是否打开微信小红书的图标')
-        print('或者截图您导航栏中小红书图标替换image_folder文件夹中的icon.png')
+        print('小红书图标搜索失败')
+        print('1. 请检查是否打开微信小红书的图标\n')
+        print('2. 请检查是否使用scale同步电脑的缩放,见README\n')
+        print('3. 可能由于您导航栏颜色不同导致匹配失败,截图您导航栏中小红书图标替换image_folder文件夹中的icon.png')
         exit(0)
     #获取定位到的图中间点坐标
     x,y=pyautogui.center(coords)
@@ -29,16 +31,16 @@ def XHS_browse(cfg,word):
     print('正在搜索返回图标')
     return_icon = pyautogui.locateOnScreen('./image_folder/return.png',confidence = 0.8)
     if return_icon!=None:
-        print('找到返回图标')
+        print('返回上级页面')
         return_icon_x,return_icon_y=pyautogui.center(return_icon)
         pyautogui.click(return_icon_x,return_icon_y,button='left')
-    else:
-        print('不在搜索页面')
+
         
     coords = pyautogui.locateOnScreen('./image_folder/search.png',confidence = 0.8)
     if checkMatch(coords):
         print('找不到搜索图标')
-        print(f'请手动截图小红书小程序搜索按钮(./image_folder/search.png)替换./image_folder/search.png')
+        print('1. 请检查是否使用scale同步电脑的缩放,见README\n')
+        print(f'2. 请手动截图小红书小程序搜索按钮(./image_folder/search.png)替换./image_folder/search.png')
         exit(0)
     
     nav_x,nav_y=pyautogui.center(coords)
@@ -54,10 +56,20 @@ def XHS_browse(cfg,word):
     
     time.sleep(2)
     coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking.png',confidence = 0.6)
+    if checkMatch(coords):
+        print('找不到"综合排序"图标')
+        print('1. 请检查是否使用scale同步电脑的缩放,见README\n')
+        print('2. 请手动截图(./image_folder/comprehensive_ranking.png)替换./image_folder/comprehensive_ranking.png')
+        exit(0)
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     time.sleep(0.2)
     coords = pyautogui.locateOnScreen('./image_folder/comprehensive_ranking_select.png',confidence = 0.6)
+    if checkMatch(coords):
+        print('找不到"(红)综合排序"图标')
+        print('1. 请检查是否使用scale同步电脑的缩放,见README\n')
+        print('2. 请手动截图(./image_folder/comprehensive_ranking_select.png)替换./image_folder/comprehensive_ranking_select.png')
+        exit(0)
     x,y=pyautogui.center(coords)
     pyautogui.click(x,y,button='left')
     
@@ -109,6 +121,9 @@ def XHS_browse(cfg,word):
     recordNumber(word,result_num)
         
 
+'''
+
+'''
 def XHS_keep_browse(cfg,word):
     
     MAX_RESULT = cfg[word]['target']

@@ -8,3 +8,7 @@ SCREEN_SCALING: 100
   now: 0
   pointer: 0
   target: 10
+"\u7F8E\u5973":
+  now: 20
+  pointer: 1
+  target: 10
