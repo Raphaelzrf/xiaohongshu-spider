@@ -31,8 +31,8 @@
 
 ## 使用方法
 
-- [使用视频介绍-2022/3/27补丁更新]
-- [视频介绍](https://github.com/learner-lu/xiaohongshu-spider/releases/download/v0.0.1/2022-03-13.17-53-57.mkv) **使用前请下载观看**
+- [使用视频介绍-2022/3/27补丁更新](https://github.com/luzhixing12345/xiaohongshu-spider/releases/download/v0.0.1/usage-3-27.mkv) **使用前请下载观看**
+- [视频介绍](https://github.com/luzhixing12345/xiaohongshu-spider/releases/download/v0.0.1/usage.mkv)
 - [爬虫设计与实现思路-B站视频](https://www.bilibili.com/video/BV1ob4y1H7vL?spm_id_from=333.999.0.0)
 - 文字介绍
   - 打开fiddler(保证底部导航栏有图标),设置filters->show only the following host->`t.xiaohongshu.com`
@@ -77,6 +77,12 @@
 
       ```python
       python main.py 程序员 -f
+      ```
+
+    - `--keep`: 中断重连
+
+      ```python
+      python main.py 程序员 --keep
       ```
 
     - `--reset`: 重置配置文件,图片不会恢复原尺寸
