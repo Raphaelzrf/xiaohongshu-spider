@@ -29,7 +29,7 @@ def recordNumber(word,result_number,pointer = None,file_name = 'config.yaml'):
 
     
     
-def initialConfig(args,key_word,file_name = 'config.yaml'):
+def initialConfig(args,key_word,clean_data = False,file_name = 'config.yaml'):
     '''
     判断是否有新键,有的话加上
     '''
@@ -45,6 +45,10 @@ def initialConfig(args,key_word,file_name = 'config.yaml'):
             }
             CHANGE = True
         else:
+            if clean_data:
+                data[word]['now'] = 0
+                CHANGE = True
+                print(f'{word} 原记录已清除')
             if data[word]['target']!=args.target:
                 data[word]['target'] = args.target
                 CHANGE = True

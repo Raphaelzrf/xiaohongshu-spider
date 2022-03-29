@@ -16,8 +16,10 @@
   pip install -r requirements.txt
   ```
 
-- 安装谷歌浏览器和谷歌浏览器驱动,并配置环境变量<br>
-  [安装教程](https://www.cnblogs.com/lfri/p/10542797.html)<br>
+- 安装谷歌浏览器和谷歌浏览器驱动,并配置环境变量
+
+  [安装教程](https://www.cnblogs.com/lfri/p/10542797.html)
+  
   check your Google browser's version, choose the closest version and download corresponding GoogleDriver from [position1](http://chromedriver.storage.googleapis.com/index.html) or [position2](https://npm.taobao.org/mirrors/chromedriver/).And then move `chromedriver.exe` under `C:\Program Files\Google\Chrome\Application` and the same folder with your python explainer. Then add `C:\Program Files\Google\Chrome\Application` to your `system path`.
 
 - 安装fiddler抓包工具

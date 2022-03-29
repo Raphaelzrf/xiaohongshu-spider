@@ -40,6 +40,8 @@ def urlProcess(word):
 
 def startBrower():
     opt = Options()
+    #opt.add_argument('--incognito') # 无痕模式
+    #opt.add_argument('--disable-infobars') # 不显示 chrome正受到自动测试软件的控制
     opt.add_argument('--no-sandbox')                # 解决DevToolsActivePort文件不存在的报错
     opt.add_argument('--disable-gpu')               # 谷歌文档提到需要加上这个属性来规避bug
     opt.add_argument('blink-settings=imagesEnabled=false')      # 不加载图片，提升运行速度

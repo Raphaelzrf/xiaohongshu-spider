@@ -32,10 +32,9 @@ def main(args):
             saveArticles(word,articles)
         return
     
-    initialConfig(args,key_word)
-    cfg = readConfigFile()
-
     if args.keep:
+        initialConfig(args,key_word)
+        cfg = readConfigFile()
         for word in key_word:
             if XHS_keep_browse(cfg,word)==0:
                 print(f'小红书数据采集完成{word}')
@@ -48,7 +47,10 @@ def main(args):
                 leftClick('./image_folder/codeIDE.png')
                 articles = getXHScontent(word)
                 saveArticles(word,articles)
+        return
     
+    initialConfig(args,key_word,clean_data=True)
+    cfg = readConfigFile()
     for word in key_word:
         XHS_browse(cfg,word)
         print(f'小红书数据采集完成{word}')
