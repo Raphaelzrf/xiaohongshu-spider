@@ -35,6 +35,8 @@
 
 ## 使用方法
 
+**2022.4.22更新，不好意思各位，现在出了点小问题，小红书好像是更新了防爬机制，链接会重定位要求验证滑块，而且手动验证也会失败。目前没有解决方案，up日后会尝试其他方法解决这个问题。目前方法行不通。**
+
 - [使用视频介绍-2022/3/27补丁更新](https://github.com/luzhixing12345/xiaohongshu-spider/releases/download/v0.0.1/usage-3-27.mkv) **使用前请下载观看**
 - [视频介绍](https://github.com/luzhixing12345/xiaohongshu-spider/releases/download/v0.0.1/usage.mkv)
 - [爬虫设计与实现思路-B站视频](https://www.bilibili.com/video/BV1ob4y1H7vL?spm_id_from=333.999.0.0)
