@@ -78,20 +78,26 @@ def XHS_browse(cfg,word):
     result_num = cfg[word]['now']
     pointer = cfg[word]['pointer']
     
-    return_icon = pyautogui.locateOnScreen('./image_folder/return.png',confidence = 0.8)
+    #return_icon = pyautogui.locateOnScreen('./image_folder/return.png',confidence = 0.8)
     
-    if return_icon == None:
-        print("未找到返回图标???")
-        print('locate by home.png as search.png')
-        home_icon = pyautogui.locateOnScreen('./image_folder/home.png',confidence = 0.8)
-        home_x,home_y = pyautogui.center(home_icon)
-        return_icon_x = nav_x
-        return_icon_y = home_y
-        print("重定位返回图标位置为:",return_icon_x,return_icon_y)
-    else:
-        # print("找到返回图标")
-        return_icon_x,return_icon_y=pyautogui.center(return_icon)
-        print(f"返回图标坐标:({return_icon_x},{return_icon_y})")
+    # if return_icon == None:
+    #     print("未找到返回图标???")
+    #     print('locate by home.png as search.png')
+    #     home_icon = pyautogui.locateOnScreen('./image_folder/home.png',confidence = 0.8)
+    #     home_x,home_y = pyautogui.center(home_icon)
+    #     return_icon_x = nav_x
+    #     return_icon_y = home_y
+    #     print("重定位返回图标位置为:",return_icon_x,return_icon_y)
+    # else:
+    #     # print("找到返回图标")
+    #     return_icon_x,return_icon_y=pyautogui.center(return_icon)
+    #     print(f"返回图标坐标:({return_icon_x},{return_icon_y})")
+    
+    home_icon = pyautogui.locateOnScreen('./image_folder/home.png',confidence = 0.8)
+    home_x,home_y = pyautogui.center(home_icon)
+    return_icon_x = nav_x
+    return_icon_y = home_y
+    
     while(result_num<MAX_RESULT):
         if result_num >= cfg['SAVE_FREQUNCY']*pointer:
             recordNumber(word,result_num,pointer)
